@@ -5,6 +5,8 @@
  */
 package controller;
 
+import java.io.IOException;
+import jxl.read.biff.BiffException;
 import model.Soal;
 
 /**
@@ -13,16 +15,23 @@ import model.Soal;
  */
 public class JawabanChecker {
     public String soal[][] = null;
+    public String jawaban;
+    public int soalke;
     
-    Soal soal1;
+    public void setSoal(String[][] soal){
+        this.soal = soal;
+    }
     
-    public JawabanChecker(){
-        soal1 = new Soal();
-        soal = soal1.importSoal();
+    public void setJawaban(String jawaban){
+        this.jawaban = jawaban;
+    }
+    
+    public void setSoalke(int soalke){
+        this.soalke = soalke;
     }
     
     public boolean cekJawaban(String jawab) {
-        return jawab.equalsIgnoreCase(soal[0][1]);
+        return jawab.equalsIgnoreCase(soal[soalke][1]);
     }
     
     

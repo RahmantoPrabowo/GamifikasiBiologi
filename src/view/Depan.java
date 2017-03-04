@@ -6,6 +6,10 @@
 package view;
 
 import controller.SoalGenerator;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jxl.read.biff.BiffException;
 
 /**
  *
@@ -19,7 +23,7 @@ public class Depan extends javax.swing.JFrame {
     Permainan per;
     SoalGenerator sg;
     
-    public Depan() {
+    public Depan() throws IOException, BiffException {
         initComponents();
         this.setLocationRelativeTo(null);
         per = new Permainan();
@@ -153,9 +157,10 @@ public class Depan extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int babke = 1;
         per.setVisible(true);
         this.dispose();
-        sg.getSoal();
+        sg.setBab(babke);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -191,7 +196,13 @@ public class Depan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Depan().setVisible(true);
+                try {
+                    new Depan().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BiffException ex) {
+                    Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

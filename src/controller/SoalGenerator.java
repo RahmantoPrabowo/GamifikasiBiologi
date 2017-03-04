@@ -5,6 +5,10 @@
  */
 package controller;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jxl.read.biff.BiffException;
 import model.Soal;
 
 /**
@@ -13,16 +17,25 @@ import model.Soal;
  */
 public class SoalGenerator {
     Soal s;
+    public int babke;
     String soal[][];
     
     public SoalGenerator(){
         s = new Soal();
     }
     
-    public String[][] getSoal(){
-        
+    public void setBab(int babke){
+        this.babke = babke;
+        s.set_babke(babke);
+    }
+    
+    public int getBab(){
+        return babke;
+    }
+    
+    public String[][] getSoal() throws IOException, BiffException{    
         soal = s.importSoal();
-        
+            
         return soal;
     }
     
