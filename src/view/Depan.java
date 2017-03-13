@@ -21,13 +21,18 @@ public class Depan extends javax.swing.JFrame {
      * Creates new form v_depan
      */
     Permainan per;
-    SoalGenerator sg;
+    SoalGenerator soalgen;
+    public int babke = 1;
     
-    public Depan() throws IOException, BiffException {
+    public Depan(int bab) throws IOException, BiffException {
+        //babke = bab;
+        System.out.println("ini babke");
+        System.out.println(babke);
+        cekBab();
         initComponents();
         this.setLocationRelativeTo(null);
-        per = new Permainan();
-        sg = new SoalGenerator();
+        per = new Permainan(this);
+        
     }
 
     /**
@@ -61,14 +66,24 @@ public class Depan extends javax.swing.JFrame {
         });
 
         jButton2.setText("BAB 2");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("BAB 3");
+        jButton3.setEnabled(false);
 
         jButton4.setText("BAB 4");
+        jButton4.setEnabled(false);
 
         jButton5.setText("BAB 5");
+        jButton5.setEnabled(false);
 
         jButton6.setText("BAB 6");
+        jButton6.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,13 +171,50 @@ public class Depan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int babke = 1;
-        per.setVisible(true);
-        this.dispose();
-        sg.setBab(babke);
+        try {
+            // TODO add your handling code here:
+            babke = 1;
+            per = new Permainan(this);
+            per.setVisible(true);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            babke = 2;
+            per = new Permainan(this);
+            per.setVisible(true);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BiffException ex) {
+            Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    public void cekBab(){
+        //this.babke = soalgen.getBab();
+        System.out.println("cek bab");
+        System.out.println(babke);
+        if(this.babke == 2){
+            jButton2.setEnabled(true);
+        }else if(this.babke == 3){
+            jButton3.setEnabled(true);
+        }else if(this.babke == 4){
+            jButton4.setEnabled(true);
+        }else if(this.babke == 5){
+            jButton5.setEnabled(true);
+        }else if(this.babke == 6){
+            jButton6.setEnabled(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -197,7 +249,7 @@ public class Depan extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Depan().setVisible(true);
+                    new Depan(1).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(Depan.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (BiffException ex) {

@@ -19,17 +19,24 @@ import jxl.read.biff.BiffException;
 public class Soal {
     public String soal[][];
     public int babke;
+    public int jmlsoal;
     
     public void set_babke(int babke){
         this.babke = babke;
     }
     
+    public int get_jumlah_soal(){
+        return this.jmlsoal;
+    }
+    
     public String[][] importSoal() throws IOException, BiffException{
         File f = new File("C:\\Users\\prastowo\\GamifikasiBiologi\\Soal.xls");
         Workbook wb = Workbook.getWorkbook(f);
-        Sheet s = wb.getSheet(babke);
+        System.out.println("Class Soal"+this.babke);
+        Sheet s = wb.getSheet(babke-1);
         int row = s.getRows();
         int col = s.getColumns();
+        this.jmlsoal = row;
         
         this.soal = new String[row][col];
         

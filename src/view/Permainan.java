@@ -24,14 +24,20 @@ public class Permainan extends javax.swing.JFrame {
      */
     SoalGenerator soalgen;
     JawabanChecker jawaban;
+    private static Depan depan;
     String soal[][] = null;
     int soalke;
-    
-    public Permainan() throws IOException, BiffException {
+    int progress;
+    int babke = 1;
+
+    public Permainan(Depan depanParameter) throws IOException, BiffException {
+        depan = depanParameter;
         initComponents();
         this.setLocationRelativeTo(null);
         soalgen = new SoalGenerator();
         jawaban = new JawabanChecker();
+        
+        progress = 0;
         inisialisasiSoal();
     }
 
@@ -61,8 +67,8 @@ public class Permainan extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnPeriksa = new javax.swing.JButton();
+        btnLanjut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -286,18 +292,18 @@ public class Permainan extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Periksa");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPeriksa.setText("Periksa");
+        btnPeriksa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPeriksaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Lanjut");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnLanjut.setText("Lanjut");
+        btnLanjut.setEnabled(false);
+        btnLanjut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLanjutActionPerformed(evt);
             }
         });
 
@@ -313,9 +319,9 @@ public class Permainan extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnPeriksa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(btnLanjut)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -329,8 +335,8 @@ public class Permainan extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnPeriksa)
+                    .addComponent(btnLanjut))
                 .addContainerGap())
         );
 
@@ -341,59 +347,79 @@ public class Permainan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriksaActionPerformed
         // TODO add your handling code here:
         jawaban.setSoal(soal);
         jawaban.setSoalke(soalke);
-        if(jRadioButton3.isSelected()){
-            
-            if(jawaban.cekJawaban(jRadioButton3.getText()) == true){
+        if (jRadioButton3.isSelected()) {
+
+            if (jawaban.cekJawaban(jRadioButton3.getText()) == true) {
                 JOptionPane.showMessageDialog(null, "Oke");
-                jButton2.setEnabled(true);
-            }else{
+                btnLanjut.setEnabled(true);
+                btnPeriksa.setEnabled(false);
+                jProgressBar1.setValue(progress += 10);
+            } else {
                 JOptionPane.showMessageDialog(null, "Salah");
             }
-        }else if(jRadioButton2.isSelected()){
-            if(jawaban.cekJawaban(jRadioButton2.getText()) == true){
+        } else if (jRadioButton2.isSelected()) {
+            if (jawaban.cekJawaban(jRadioButton2.getText()) == true) {
                 JOptionPane.showMessageDialog(null, "Oke");
-                jButton2.setEnabled(true);
-            }else{
+                btnLanjut.setEnabled(true);
+                btnPeriksa.setEnabled(false);
+                jProgressBar1.setValue(progress += 10);
+            } else {
                 JOptionPane.showMessageDialog(null, "Salah");
             }
-        }else if(jRadioButton1.isSelected()){
-            if(jawaban.cekJawaban(jRadioButton1.getText()) == true){
+        } else if (jRadioButton1.isSelected()) {
+            if (jawaban.cekJawaban(jRadioButton1.getText()) == true) {
                 JOptionPane.showMessageDialog(null, "Oke");
-                jButton2.setEnabled(true);
-            }else{
+                btnLanjut.setEnabled(true);
+                btnPeriksa.setEnabled(false);
+                jProgressBar1.setValue(progress += 10);
+            } else {
                 JOptionPane.showMessageDialog(null, "Salah");
             }
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jButton2.setEnabled(false);
-        
-        soalke++;
-        
-        buttonGroup1.clearSelection();
-                
-        jLabel1.setText(soal[soalke][0]);
-        jRadioButton3.setText(soal[soalke][2]);
-        jRadioButton2.setText(soal[soalke][3]);
-        jRadioButton1.setText(soal[soalke][4]);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnPeriksaActionPerformed
 
-    private void inisialisasiSoal() throws IOException, BiffException{        
+    private void btnLanjutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLanjutActionPerformed
+        
+        if (soalke == (soalgen.getJumlahSoal()-1)) {
+            JOptionPane.showMessageDialog(null, "Selamat Anda Sudah Menjawab Semua Soal");
+            System.out.print("bab ke : ");System.out.println(depan.babke);
+            depan.babke++;
+            System.out.println(depan.babke);
+            depan.cekBab();
+            depan.setVisible(true);
+            this.dispose();
+        } else {
+            btnPeriksa.setEnabled(true);
+            btnLanjut.setEnabled(false);
+
+            soalke++;
+
+            buttonGroup1.clearSelection();
+
+            jLabel1.setText(soal[soalke][0]);
+            jRadioButton3.setText(soal[soalke][2]);
+            jRadioButton2.setText(soal[soalke][3]);
+            jRadioButton1.setText(soal[soalke][4]);
+        }
+
+    }//GEN-LAST:event_btnLanjutActionPerformed
+
+    private void inisialisasiSoal() throws IOException, BiffException {
+        soalgen.setBab(depan.babke);
         this.soalke = 0;
         this.soal = soalgen.getSoal();
-        
+
         jLabel1.setText(soal[soalke][0]);
         jRadioButton3.setText(soal[soalke][2]);
         jRadioButton2.setText(soal[soalke][3]);
         jRadioButton1.setText(soal[soalke][4]);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -428,7 +454,7 @@ public class Permainan extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Permainan().setVisible(true);
+                    new Permainan(depan).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(Permainan.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (BiffException ex) {
@@ -439,9 +465,9 @@ public class Permainan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLanjut;
+    private javax.swing.JButton btnPeriksa;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

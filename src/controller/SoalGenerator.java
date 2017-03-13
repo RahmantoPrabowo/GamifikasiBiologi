@@ -26,7 +26,8 @@ public class SoalGenerator {
     
     public void setBab(int babke){
         this.babke = babke;
-        s.set_babke(babke);
+        s.set_babke(this.babke);
+        System.out.println("Class SoalGenerator"+this.babke);
     }
     
     public int getBab(){
@@ -37,6 +38,10 @@ public class SoalGenerator {
         soal = s.importSoal();
             
         return soal;
+    }
+    
+    public int getJumlahSoal(){
+        return s.get_jumlah_soal();
     }
     
     public void generateSoal(){
