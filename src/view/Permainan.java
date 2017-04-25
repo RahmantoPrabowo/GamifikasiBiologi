@@ -25,6 +25,7 @@ public class Permainan extends javax.swing.JFrame {
     SoalGenerator soalgen;
     JawabanChecker jawaban;
     private static Depan depan;
+    private static Badge badge;
     String soal[][] = null;
     int soalke;
     int progress;
@@ -36,6 +37,7 @@ public class Permainan extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         soalgen = new SoalGenerator();
         jawaban = new JawabanChecker();
+        badge = new Badge(depanParameter);
         
         progress = 0;
         inisialisasiSoal();
@@ -354,30 +356,30 @@ public class Permainan extends javax.swing.JFrame {
         if (jRadioButton3.isSelected()) {
 
             if (jawaban.cekJawaban(jRadioButton3.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Oke");
+                JOptionPane.showMessageDialog(null, "Selamat, jawaban Anda benar");
                 btnLanjut.setEnabled(true);
                 btnPeriksa.setEnabled(false);
                 jProgressBar1.setValue(progress += 10);
             } else {
-                JOptionPane.showMessageDialog(null, "Salah");
+                JOptionPane.showMessageDialog(null, "Maaf, jawaban Anda salah coba lagi");
             }
         } else if (jRadioButton2.isSelected()) {
             if (jawaban.cekJawaban(jRadioButton2.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Oke");
+                JOptionPane.showMessageDialog(null, "Selamat, jawaban Anda benar");
                 btnLanjut.setEnabled(true);
                 btnPeriksa.setEnabled(false);
                 jProgressBar1.setValue(progress += 10);
             } else {
-                JOptionPane.showMessageDialog(null, "Salah");
+                JOptionPane.showMessageDialog(null, "Maaf, jawaban Anda salah coba lagi");
             }
         } else if (jRadioButton1.isSelected()) {
             if (jawaban.cekJawaban(jRadioButton1.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Oke");
+                JOptionPane.showMessageDialog(null, "Selamat, jawaban Anda benar");
                 btnLanjut.setEnabled(true);
                 btnPeriksa.setEnabled(false);
                 jProgressBar1.setValue(progress += 10);
             } else {
-                JOptionPane.showMessageDialog(null, "Salah");
+                JOptionPane.showMessageDialog(null, "Maaf, jawaban Anda salah coba lagi");
             }
         }
 
@@ -386,12 +388,9 @@ public class Permainan extends javax.swing.JFrame {
     private void btnLanjutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLanjutActionPerformed
         
         if (soalke == (soalgen.getJumlahSoal()-1)) {
-            JOptionPane.showMessageDialog(null, "Selamat Anda Sudah Menjawab Semua Soal");
-            System.out.print("bab ke : ");System.out.println(depan.babke);
-            depan.babke++;
-            System.out.println(depan.babke);
-            depan.cekBab();
-            depan.setVisible(true);
+            //JOptionPane.showMessageDialog(null, "Selamat Anda Sudah Menjawab Semua Soal");
+            badge.setVisible(true);
+            
             this.dispose();
         } else {
             btnPeriksa.setEnabled(true);
