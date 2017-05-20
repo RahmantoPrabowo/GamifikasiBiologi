@@ -30,7 +30,7 @@ public class Soal {
     }
     
     public String[][] importSoal() throws IOException, BiffException{
-        File f = new File("C:\\Users\\prastowo\\GamifikasiBiologi\\Soal.xls");
+        File f = new File("C:\\Users\\Rahmanto Prbaowo\\Documents\\NetBeansProjects\\GamifikasiBiologi\\Soal.xls");
         Workbook wb = Workbook.getWorkbook(f);
         System.out.println("Class Soal"+this.babke);
         Sheet s = wb.getSheet(babke-1);
